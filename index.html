@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fake News Detection Tool - X Bhanu</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f9;
+      text-align: center;
+      padding: 40px;
+    }
+    h1 {
+      color: #2c3e50;
+    }
+    textarea {
+      width: 80%;
+      height: 120px;
+      padding: 10px;
+      margin: 20px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+    button {
+      background: #3498db;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background: #2980b9;
+    }
+    #result {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .fake {
+      color: red;
+    }
+    .real {
+      color: green;
+    }
+  </style>
+</head>
+<body>
+  <h1>📰 Fake News Detection Tool</h1>
+  <p>Paste a headline or article below:</p>
+  
+  <textarea id="newsInput" placeholder="Enter news text here..."></textarea><br>
+  <button onclick="checkNews()">Check Credibility</button>
+  
+  <div id="result"></div>
+
+  <script>
+    function checkNews() {
+      const text = document.getElementById("newsInput").value.toLowerCase();
+      const resultDiv = document.getElementById("result");
+
+      // Simple keyword-based fake news simulation
+      const fakeKeywords = ["shocking", "miracle", "click here", "you won't believe", "viral", "secret"];
+      let score = 0;
+
+      fakeKeywords.forEach(word => {
+        if (text.includes(word)) {
+          score++;
+        }
+      });
+
+      if (text.trim() === "") {
+        resultDiv.innerHTML = "⚠️ Please enter some text!";
+        resultDiv.className = "";
+      } else if (score > 2) {
+        resultDiv.innerHTML = "⚠️ This looks like FAKE news!";
+        resultDiv.className = "fake";
+      } else {
+        resultDiv.innerHTML = "✔️ This looks like REAL news!";
+        resultDiv.className = "real";
+      }
+    }
+  </script>
+</body>
+</html>
